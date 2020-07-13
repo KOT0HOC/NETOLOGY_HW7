@@ -8,7 +8,6 @@ def create_dict_from_file(file_name):
             counter = int(file_work.readline())
             list_of_ingridient = []
             for i in range(counter):
-                # temp_dict = {}
                 ingridient = file_work.readline().rstrip().lower()
                 component = ingridient.split('|')
                 temp_dict = {'ingredient_name': component[0], 'quantity': component[1], 'measure': component[2]}
@@ -20,23 +19,21 @@ def create_dict_from_file(file_name):
 
 def get_shop_list_by_dishes(cook_book, dish_name, person_count):
     checklist = {}
-    #dish_name = cook_book.keys()
     for dish in dish_name:
         if dish in cook_book:
             ingredients = cook_book[dish]
-            #print(ingredients[1])
             for amount in ingredients:
+                ingredient = amount['ingredient_name']
                 quantity_count = int(amount['quantity']) * person_count
-                print(quantity_count)
-                temp_dict = {'quantity': quantity_count}
-        cook_book.update(temp_dict)
-        #ingredients.update(temp_dict)
-        print(temp_dict)
-        #checklist[dish_name] = {ingredients:quantity_count}
-        #print(checklist)
-        #print(cook_book[dish_name][1]['quantity'])
-    #print(dish_name)
-        print(cook_book[dish])
+                measure = amount['measure']
+                if ingredient in checklist:
+                    checklist[ingredient]['quantity_count'] += quantity_count
+                else:
+                    checklist[ingredient] = {
+                        'quantity_count': quantity_count,
+                        'measure': measure
+                    }
+    return checklist
 
 
 def main():
