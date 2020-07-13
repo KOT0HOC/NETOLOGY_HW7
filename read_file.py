@@ -1,3 +1,5 @@
+from pprint import pprint
+
 def create_dict_from_file(file_name):
     """Функция чтения файла + создание словаря нужного формата"""
     cook_book = {}
@@ -38,6 +40,8 @@ def get_shop_list_by_dishes(cook_book, dish_name, person_count):
 
 def main():
     cook_book = create_dict_from_file('recipes.txt')
-    result = get_shop_list_by_dishes(cook_book, ['Омлет'], 2)
-    print(result)
+    result = get_shop_list_by_dishes(cook_book, ['Запеченный картофель', 'Омлет'], 2)
+    pprint(result)
+
+
 main()
